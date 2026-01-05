@@ -1,25 +1,35 @@
 package com.bill.loader.impl;
 
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.bill.BillingSystemStandaloneApplication;
 import com.bill.entity.Menu;
 import com.bill.loader.MenuLoader;
 
 @Component
 public class CSVMenuLoader implements MenuLoader {
+	@Value("${menu.file.path}")
+	String menu_path;
+
+    private final BillingSystemStandaloneApplication billingSystemStandaloneApplication;
+
+    CSVMenuLoader(BillingSystemStandaloneApplication billingSystemStandaloneApplication) {
+        this.billingSystemStandaloneApplication = billingSystemStandaloneApplication;
+    }
 
 	@Override
 	public Map<Integer, Menu> loadMenu() {
 		Map<Integer, Menu> menuMap = new LinkedHashMap<Integer, Menu>();
 		try {
-			BufferedReader br = new BufferedReader(
-					new InputStreamReader(new ClassPathResource("menu.csv").getInputStream()));
+			System.out.println(menu_path);
+			BufferedReader br = Files.newBufferedReader(Path.of(menu_path));
 			String line;
 			boolean headerSkipped = false;
 			while ((line = br.readLine()) != null) {
