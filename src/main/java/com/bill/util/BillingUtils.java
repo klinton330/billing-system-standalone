@@ -112,6 +112,10 @@ public class BillingUtils {
 		    }
 		}
 	}
+	
+	public void saveToDB(Bills bills) {
+		billingService.checkout(bills);
+	}
 
 	
 

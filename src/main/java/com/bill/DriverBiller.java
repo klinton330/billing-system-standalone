@@ -54,6 +54,7 @@ public class DriverBiller {
 				billingUtils.editBills(menu, bills, sc);
 				break;
 			case 4:
+				billingUtils.saveToDB(bills);
 				bills =new Bills();
 				break;
 

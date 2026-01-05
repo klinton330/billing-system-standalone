@@ -1,17 +1,16 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:billingdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+    url: jdbc:mysql://localhost:3306/billing_db
+    username: root
+    password: Chennai@330
+    driver-class-name: com.mysql.jdbc.Driver
+
   jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-  h2:
-    console:
-      enabled: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
 
 menu:
   file:
-    path: D:\files\menu.csv
+    path: "D:/files/menu.csv"
