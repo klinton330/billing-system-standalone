@@ -35,7 +35,8 @@ public class DriverBiller {
 			System.out.println("""
 					1. Add Item
 					2. View Bill
-					3. Finalize & Exit
+					3. Edit Item
+					4. Finalize & Exit
 					""");
 
 			System.out.print("Choose option: ");
@@ -45,8 +46,16 @@ public class DriverBiller {
 			switch (option) {
 			case 1:
 				billingUtils.addItemFlow(menu, bills, sc);
+				break;
 			case 2:
 				billingUtils.viewBill(bills);
+				break;
+			case 3:
+				billingUtils.editBills(menu, bills, sc);
+				break;
+			case 4:
+				bills =new Bills();
+				break;
 
 			}
 

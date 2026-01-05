@@ -69,4 +69,50 @@ public class BillingUtils {
 		System.out.println("Total: ₹" + billingService.calculateTotal(bill));
 	}
 
+	public void editBills(Map<Integer, Menu> menu, Bills bills, Scanner sc) {
+
+		System.out.println("\n--- MENU ---");
+
+		menu.forEach((id, item) -> System.out.println(id + ". " + item.getName() + " - ₹" + item.getPrice()));
+
+		while (true) {
+
+			System.out.println("0. Done adding items");
+			if (bills.isEmpty()) {
+				System.out.println("Bill is empty");
+				return;
+			}
+			System.out.print("Enter item number to edit: ");
+			int itemNo = sc.nextInt();
+
+			if (itemNo == 0) {
+				System.out.println("Finished adding items");
+				break;
+			}
+
+			Menu menuItem = menu.get(itemNo);
+			if (menuItem == null) {
+				System.out.println("Invalid menu number");
+				continue;
+			}
+
+			System.out.print("Enter new quantity: ");
+			int qty = sc.nextInt();
+
+			if (qty <= 0) {
+				System.out.println("Quantity must be greater than zero");
+				return;
+			}
+			
+			try {
+				billingService.updateQuantity(bills, menuItem, qty);
+		        System.out.println("Updated: " + menuItem.getName()+" "+menuItem.getPrice());
+		    } catch (IllegalArgumentException ex) {
+		        System.out.println(ex.getMessage());
+		    }
+		}
+	}
+
+	
+
 }

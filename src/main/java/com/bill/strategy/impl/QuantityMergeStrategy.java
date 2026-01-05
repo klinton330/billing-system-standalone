@@ -12,15 +12,29 @@ public class QuantityMergeStrategy implements ItemMergeStrategy {
 	@Override
 	public OrderItem merge(OrderItem existing, Menu menuItem, int qty) {
 		if (existing == null) {
-	        OrderItem item = new OrderItem();
-	        item.setName(menuItem.getName());
-	        item.setPrice(menuItem.getPrice());
-	        item.setQuantity(qty);
-	        return item;
-	    }
+			OrderItem item = new OrderItem();
+			item.setName(menuItem.getName());
+			item.setPrice(menuItem.getPrice());
+			item.setQuantity(qty);
+			return item;
+		}
 
-	    existing.setQuantity(existing.getQuantity() + qty);
-	    return existing;
+		existing.setQuantity(existing.getQuantity() + qty);
+		return existing;
+	}
+
+	@Override
+	public OrderItem updateQuantity(OrderItem existing, Menu menuItem, int qty) {
+		if (existing == null) {
+			OrderItem item = new OrderItem();
+			item.setName(menuItem.getName());
+			item.setPrice(menuItem.getPrice());
+			item.setQuantity(qty);
+			return item;
+		}
+		
+		existing.setQuantity(qty);
+		return existing;
 	}
 
 }

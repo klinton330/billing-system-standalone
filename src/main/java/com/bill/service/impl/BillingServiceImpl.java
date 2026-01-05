@@ -32,9 +32,17 @@ public class BillingServiceImpl implements BillingService {
 	@Override
 	public double calculateTotal(Bills bill) {
 
-        return bill.getItems().stream()
-                .mapToDouble(OrderItem::getTotalPrice)
-                .sum();
-    }
+		return bill.getItems().stream().mapToDouble(OrderItem::getTotalPrice).sum();
+	}
+
+	@Override
+	public void updateQuantity(Bills bills, Menu menu, int quantity) {
+		if (quantity <= 0) {
+			throw new IllegalArgumentException("Quantity must be greater than zero");
+		}
+		OrderItem existingItem = bills.getItem(menu.getName());
+		OrderItem orderItem = itemMergeStrategy.updateQuantity(existingItem, menu, quantity);
+		bills.putItem(menu.getName(), orderItem);
+	}
 
 }
