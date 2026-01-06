@@ -10,8 +10,8 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bill</groupId>
-	<artifactId>billing-system-standalone</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>billing-system</artifactId>
+	<version>v1</version>
 	<name>billing-system-standalone</name>
 	<description>Billing system for Shop</description>
 	<packaging>jar</packaging>
@@ -55,12 +55,15 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-maven-plugin</artifactId>
-</plugin>
-		</plugins>
-	</build>
+    <plugins>
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+            <configuration>
+                <mainClass>com.bill.BillingSystemStandaloneApplication</mainClass>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 </project>

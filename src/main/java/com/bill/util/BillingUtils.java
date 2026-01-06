@@ -26,7 +26,7 @@ public class BillingUtils {
 
 		System.out.println("\n--- MENU ---");
 
-		menu.forEach((id, item) -> System.out.println(id + ". " + item.getName() + " - ₹" + item.getPrice()));
+		menu.forEach((id, item) -> System.out.println(id + ". " + item.getName() + " - Rs. " + item.getPrice()));
 		
 		System.out.println("0. Done adding items");
 
@@ -70,16 +70,16 @@ public class BillingUtils {
 		}
 
 		bill.getItems().forEach(item -> System.out
-				.println(item.getName() + " x " + item.getQuantity() + " = ₹" + item.getTotalPrice()));
+				.println(item.getName() + " x " + item.getQuantity() + " = Rs." + item.getTotalPrice()));
 
-		System.out.println("Total: ₹" + billingService.calculateTotal(bill));
+		System.out.println("Total: Rs." + billingService.calculateTotal(bill));
 	}
 
 	public void editBills(Map<Integer, Menu> menu, Bills bills, Scanner sc) {
 
 		System.out.println("\n--- MENU ---");
 
-		menu.forEach((id, item) -> System.out.println(id + ". " + item.getName() + " - ₹" + item.getPrice()));
+		menu.forEach((id, item) -> System.out.println(id + ". " + item.getName() + " - Rs." + item.getPrice()));
 
 		while (true) {
 
