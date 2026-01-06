@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import com.bill.BillingSystemStandaloneApplication;
 import com.bill.entity.Bills;
 import com.bill.entity.Menu;
 import com.bill.services.BillingService;
@@ -13,18 +13,24 @@ import com.bill.services.BillingService;
 @Component
 public class BillingUtils {
 
+    private final BillingSystemStandaloneApplication billingSystemStandaloneApplication;
+
 	@Autowired
 	BillingService billingService;
+
+    BillingUtils(BillingSystemStandaloneApplication billingSystemStandaloneApplication) {
+        this.billingSystemStandaloneApplication = billingSystemStandaloneApplication;
+    }
 
 	public void addItemFlow(Map<Integer, Menu> menu, Bills bills, Scanner sc) {
 
 		System.out.println("\n--- MENU ---");
 
 		menu.forEach((id, item) -> System.out.println(id + ". " + item.getName() + " - ₹" + item.getPrice()));
+		
+		System.out.println("0. Done adding items");
 
 		while (true) {
-
-			System.out.println("0. Done adding items");
 
 			System.out.print("Enter item number: ");
 			int itemNo = sc.nextInt();
@@ -114,7 +120,12 @@ public class BillingUtils {
 	}
 	
 	public void saveToDB(Bills bills) {
+		try {
 		billingService.checkout(bills);
+		}
+		catch(Exception e) {
+			System.out.println("Enter proper input for bills");
+		}
 	}
 
 	
